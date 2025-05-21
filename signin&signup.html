@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In / Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(160deg, #003840, #00b8a9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 350px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: floatIn 1.5s ease forwards;
+    }
+
+    @keyframes floatIn {
+      0% {
+        transform: translateY(-100px) scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .container h2 {
+      color: white;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #00b8a9;
+    }
+
+    .toggle-link {
+      color: #fff;
+      text-align: center;
+      margin-top: 15px;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-link:hover {
+      color: #ffe;
+    }
+
+    .lights {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+      pointer-events: none;
+      animation: swirl 10s linear infinite;
+    }
+
+    .lights::before,
+    .lights::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+
+    @keyframes swirl {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="authContainer">
+    <div class="lights"></div>
+    <h2 id="formTitle">Sign In</h2>
+
+    <form id="authForm">
+      <input type="hidden" name="type" id="formType" value="Sign In" />
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" required />
+      </div>
+
+      <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" />
+      </div>
+
+      <button class="btn" type="submit">Continue</button>
+      <div class="toggle-link" onclick="toggleForm()">Don't have an account? Sign Up</div>
+    </form>
+  </div>
+
+  <script>
+    const formTitle = document.getElementById('formTitle');
+    const toggleLink = document.querySelector('.toggle-link');
+    const formType = document.getElementById('formType');
+    const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
+    const form = document.getElementById('authForm');
+
+    let isSignUp = false;
+
+    function toggleForm() {
+      isSignUp = !isSignUp;
+      formTitle.textContent = isSignUp ? 'Sign Up' : 'Sign In';
+      toggleLink.textContent = isSignUp
+        ? 'Already have an account? Sign In'
+        : "Don't have an account? Sign Up";
+      formType.value = isSignUp ? "Sign Up" : "Sign In";
+      confirmPasswordGroup.style.display = isSignUp ? 'block' : 'none';
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
+
+      if (isSignUp) {
+        if (!confirmPassword || password !== confirmPassword) {
+          alert("Passwords do not match.");
+          return;
+        }
+
+        // Save to localStorage (optional if you plan to use a backend later)
+        localStorage.setItem(`user_${email}`, password);
+
+        // 🔁 Send data to Formcarry
+        const FORMCARRY_ENDPOINT = "https://formcarry.com/s/dVL4mec1YUt"; // <-- REPLACE THIS
+        try {
+          const response = await fetch(FORMCARRY_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+          });
+
+          if (response.ok) {
+            alert("Account created! You can now sign in.");
+            toggleForm();
+          } else {
+            alert("Error submitting to Formcarry.");
+          }
+        } catch (err) {
+          alert("Formcarry error: " + err.message);
+        }
+
+      } else {
+        // Sign In logic
+        const storedPassword = localStorage.getItem(`user_${email}`);
+        if (!storedPassword) {
+          alert("User not found. Please sign up.");
+          toggleForm();
+          return;
+        }
+
+        if (storedPassword !== password) {
+          alert("Incorrect password.");
+          return;
+        }
+
+        alert("Login successful! 🎉");
+        setTimeout(() => {
+          localStorage.setItem("currentUser", email); // store user info
+          window.location.href = "Main.html"; // Redirect
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>

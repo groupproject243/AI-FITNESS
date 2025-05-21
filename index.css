@@ -1,0 +1,102 @@
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      background: linear-gradient(to bottom, #003a49, #00c9c8);
+      color: white;
+      overflow-x: hidden;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(0, 58, 73, 0.95);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo { font-size: 1.5rem; font-weight: 700; color: #00f7ff; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: white; text-decoration: none; transition: 0.3s; }
+    nav ul li a:hover { color: #00f7ff; }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(to bottom right, #003a49, #00c9c8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
+    .hero a {
+      background: #00f7ff;
+      color: #003a49;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .hero a:hover { background: #0ea5e9; }
+
+    .section { padding: 4rem 2rem; text-align: center; }
+    .section h2 { font-size: 2.5rem; margin-bottom: 2rem; }
+
+    .workout-plans, .pricing-cards, .auth-section, .footer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+      min-width: 280px;
+      max-width: 300px;
+    }
+    .card:hover { transform: scale(1.05); }
+    .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #00f7ff; }
+    .card p { font-size: 1.2rem; margin-bottom: 1rem; }
+    .card ul { list-style: none; padding: 0; }
+    .card ul li { margin: 0.5rem 0; }
+
+    .auth-section input {
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    .auth-section button {
+      padding: 0.8rem;
+      background: #00f7ff;
+      border: none;
+      border-radius: 5px;
+      color: #003a49;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .auth-section button:hover { background: #0ea5e9; }
+
+    .footer {
+      padding: 2rem;
+      background: rgba(0, 58, 73, 0.95);
+      text-align: center;
+    }
+    .footer p { margin-top: 1rem; color: #94a3b8; }
+
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }

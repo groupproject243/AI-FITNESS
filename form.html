@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workout Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="progress-bar">
+      <div class="step-text">step 1 of 2</div>
+      <div class="step-controls">
+        <button onclick="location.href='index.html'">&larr;</button>
+      </div>
+    </div>
+
+    <form id="userForm" class="form-card">
+      <h2>Get started</h2>
+      <p class="subtext">Tell us about yourself to create your first custom workout</p>
+
+      <div class="field-row">
+        <label>Gender</label>
+        <div class="toggle-group">
+          <input type="radio" name="gender" id="male" value="Male" checked>
+          <label for="male">Male</label>
+          <input type="radio" name="gender" id="female" value="Female">
+          <label for="female">Female</label>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label>Unit of Measurement</label>
+        <div class="toggle-group">
+          <input type="radio" name="unit" id="lbs" value="lbs" checked>
+          <label for="lbs">Lbs</label>
+          <input type="radio" name="unit" id="kgs" value="kgs">
+          <label for="kgs">Kgs</label>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label>Bodyweight</label>
+        <input type="number" name="weight" placeholder="180" required>
+      </div>
+
+      <div class="field-row">
+        <label>Fitness Level</label>
+        <select name="level">
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate" selected>Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label>Fitness Goal</label>
+        <select name="goal">
+          <option value="Build muscle" selected>Build muscle</option>
+          <option value="Lose fat">Lose fat</option>
+          <option value="Increase endurance">Increase endurance</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label>How many days can you workout per week?</label>
+        <input type="range" name="days" min="1" max="6" value="5">
+      </div>
+
+      <div class="field-row">
+        <label>Equipment</label>
+        <select name="equipment" multiple>
+          <option value="Cardio" selected>Cardio</option>
+          <option value="Strength">Strength</option>
+          <option value="Functional">Functional</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+          <option value="None">None</option>
+        </select>
+      </div>
+
+<a href="result.html" class="btn" style="display: block; text-align: center;">GENERATE YOUR WORKOUT</a>
+
+
+      <div class="footer">
+        By signing up you agree to our 
+        <a href="#" style="color: #fff; text-decoration: underline;">Terms and Conditions</a> and 
+        <a href="#" style="color: #fff; text-decoration: underline;">Privacy Policy</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
