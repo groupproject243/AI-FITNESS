@@ -19,10 +19,113 @@
   </nav>
 
   <section class="hero fade-in" id="home">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="videoplayback.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
     <h1>Smarter Workouts. Better Results.</h1>
     <p>Get AI-generated workout plans tailored to your fitness level, goals, and equipment availability.</p>
     <a href="#plans">Generate Your Plan</a>
   </section>
+
+  
+
+<section class="summary-section fade-in">
+  <h2>Personal summary based on your answers</h2>
+
+  <div class="summary-box">
+    <div class="bmi">
+      <p class="label">Current BMI</p>
+      <h3>38.1 BMI</h3>
+      <div class="bmi-bar">
+        <div class="bar"></div>
+        <div class="pointer" style="left: 90%;"></div>
+      </div>
+      <p class="status">Obese</p>
+      <p class="desc">The body mass index (BMI) is a measure that uses your height and weight to work out if your weight is healthy.</p>
+    </div>
+
+    <div class="intake-grid">
+      <div class="intake-card">
+        <div class="recommend">recommended</div>
+        <p class="label">Daily calorie intake</p>
+        <h3>1824 kcal</h3>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 36%;"></div>
+        </div>
+        <div class="bar-labels">
+          <span>1000 kcal</span>
+          <span>5000 kcal</span>
+        </div>
+      </div>
+      <div class="intake-card">
+        <div class="recommend">recommended</div>
+        <p class="label">Daily water intake</p>
+        <h3>3.3 l</h3>
+        <div class="water-cups">
+          <span class="cup filled"></span>
+          <span class="cup filled"></span>
+          <span class="cup filled"></span>
+          <span class="cup filled"></span>
+          <span class="cup filled"></span>
+          <span class="cup filled"></span>
+          <span class="cup"></span>
+          <span class="cup"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Personalized plan for <span class="highlight">Alan Joshua</span> is <span class="highlight orange">ready!</span></h2>
+
+  <div class="plan-grid">
+    <div class="plan-item">⏱️ <strong>1 hour</strong><br>Workout Duration</div>
+    <div class="plan-item">💪 <strong>Intermediate</strong><br>Fitness Level</div>
+    <div class="plan-item">🏠 <strong>Home</strong><br>Place to Workout</div>
+    <div class="plan-item">📅 <strong>3 times per week</strong><br>Workout Frequency</div>
+  </div>
+
+  <h3>Goals for your program also include:</h3>
+  <ul class="goals-list">
+    <li>🧘 Reduce stress</li>
+    <li>😴 Improve sleep</li>
+    <li>💡 Self-discipline</li>
+    <li>🏃‍♀️ Feel healthier</li>
+    <li>🧱 Form a physical habit</li>
+  </ul>
+</section>
+
+
+<section class="section fade-in services-section">
+  <h2><span class="highlight">Our</span> Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="image1.jpg" alt="Physical Fitness" />
+      <h3>Physical Fitness</h3>
+    </div>
+    <div class="service-card">
+      <img src="image2.jpg" alt="Weight Gain" />
+      <h3>Weight Gain</h3>
+    </div>
+    <div class="service-card">
+      <img src="image3.jpg" alt="Strength Training" />
+      <h3>Strength Training</h3>
+    </div>
+    <div class="service-card">
+      <img src="image4.jpg" alt="Fat Lose" />
+      <h3>Fat Loss</h3>
+    </div>
+    <div class="service-card">
+      <img src="image5.jpg" alt="Weightlifting" />
+      <h3>Weightlifting</h3>
+    </div>
+    <div class="service-card">
+      <img src="about.jpg" alt="Running" />
+      <h3>Running</h3>
+    </div>
+  </div>
+</section>
 
   <section class="section fade-in" id="plans">
     <h2>Sample Workout Plan</h2>
@@ -51,36 +154,68 @@
     </div>
   </section>
 
-  <section class="section fade-in" id="pricing">
-    <h2>Choose Your Plan</h2>
-    <div class="pricing-cards">
-      <div class="card">
-        <h3>Free</h3>
-        <p>$0/month</p>
-        <ul>
-          <li>Basic AI Plan</li>
-          <li>No Support</li>
-        </ul>
-      </div>
-      <div class="card highlight">
-        <h3>Pro</h3>
-        <p>$9.99/month</p>
-        <ul>
-          <li>Custom Plans</li>
-          <li>Video Tutorials</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Elite</h3>
-        <p>$19.99/month</p>
-        <ul>
-          <li>Trainer Access</li>
-          <li>Nutrition Plans</li>
-          <li>Progress Dashboard</li>
-        </ul>
-      </div>
+  <section class="section fade-in pricing-plan-section">
+  <div class="plan-header">
+    <p class="live-counter">1103 people bought workout plans in the last hour</p>
+    <h2>Choose the best plan for you</h2>
+  </div>
+
+  <div class="pricing-layout">
+    <div class="plan-image">
+      <img src="men1.png" alt="Muscular Model" />
     </div>
-  </section>
+    <div class="plan-options">
+      <label class="plan-option">
+        <input type="radio" name="plan" />
+        <div>
+          <span class="plan-name">1-WEEK PLAN</span>
+          <span class="plan-price">0.71 <small>USD</small> per day</span>
+          <span class="plan-total">4.99 USD</span>
+        </div>
+      </label>
+
+      <label class="plan-option selected">
+        <input type="radio" name="plan" checked />
+        <div>
+          <span class="plan-name">4-WEEK PLAN</span>
+          <span class="plan-price">1.33 <small>USD</small> per day</span>
+          <span class="plan-total">39.99 USD</span>
+        </div>
+        <div class="most-popular">MOST POPULAR</div>
+      </label>
+
+      <label class="plan-option">
+        <input type="radio" name="plan" />
+        <div>
+          <span class="plan-name">12-WEEK PLAN</span>
+          <span class="plan-price">0.65 <small>USD</small> per day</span>
+          <span class="plan-total">59.99 USD</span>
+        </div>
+      </label>
+
+      <button class="continue-btn">Continue <i class="fas fa-arrow-right"></i></button>
+      <p class="subscription-note">
+        By continuing, you agree that your subscription will be auto-renewed at the full price of 39.99 USD each month...
+        <a href="#">Settings</a>, <a href="#">Subscription terms</a>, <a href="#">Refund policy</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in money-back-section">
+  <div class="guarantee-text">
+    <h2>Money-Back Guarantee</h2>
+    <p>We believe that our plan may work for you and you'll get visible results in 4 weeks! We are even ready to completely refund you within 30 days...</p>
+    <a href="#" class="policy-link">money-back policy</a>
+  </div>
+  <div class="guarantee-badge">
+    <div class="badge-circle">
+      <span>30</span>
+      <small>DAYS<br>AFTER PURCHASE</small>
+    </div>
+  </div>
+</section>
+
 
   <footer class="footer">
     <p>&copy; 2025 AI Fit. All rights reserved.</p>
