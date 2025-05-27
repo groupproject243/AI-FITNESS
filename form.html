@@ -4,20 +4,191 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Workout Generator</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #004d5a, #00b4b4);
+      color: white;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+    }
+
+    .field-row {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #003b5a;
+      color: white;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .toggle-group input[type="radio"] {
+      display: none;
+    }
+
+    .toggle-group label {
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: #003b5a;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .toggle-group input[type="radio"]:checked + label {
+      background: #0ff;
+      color: #001f2e;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #0ff;
+      color: #003b5a;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: #00e0e0;
+    }
+
+    .workout-output {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .day-block {
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .day-block h3 {
+      margin: 0 0 10px;
+      color: #0ff;
+    }
+
+    .exercise {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      font-size: 1.4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 255, 255, 0.2);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .exercise-text {
+      flex: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #loadingOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading-box {
+      text-align: center;
+      color: #0ff;
+      font-size: 1.2rem;
+    }
+
+    .dots-loader span {
+      display: inline-block;
+      font-size: 2rem;
+      animation: blink 1.4s infinite;
+    }
+
+    .dots-loader span:nth-child(2) { animation-delay: 0.2s; }
+    .dots-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      20% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      padding: 20px 0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <div class="progress-bar">
-      <div class="step-text">step 1 of 2</div>
-      <div class="step-controls">
-        <button onclick="location.href='index.html'">&larr;</button>
-      </div>
-    </div>
-
     <form id="userForm" class="form-card">
-      <h2>Get started</h2>
-      <p class="subtext">Tell us about yourself to create your first custom workout</p>
+      <h2>Generate Your AI-Powered Workout Plan</h2>
 
       <div class="field-row">
         <label>Gender</label>
@@ -30,23 +201,13 @@
       </div>
 
       <div class="field-row">
-        <label>Unit of Measurement</label>
-        <div class="toggle-group">
-          <input type="radio" name="unit" id="lbs" value="lbs" checked>
-          <label for="lbs">Lbs</label>
-          <input type="radio" name="unit" id="kgs" value="kgs">
-          <label for="kgs">Kgs</label>
-        </div>
-      </div>
-
-      <div class="field-row">
         <label>Bodyweight</label>
-        <input type="number" name="weight" placeholder="180" required>
+        <input type="number" name="weight" id="weight" placeholder="180" required>
       </div>
 
       <div class="field-row">
         <label>Fitness Level</label>
-        <select name="level">
+        <select name="level" id="level">
           <option value="Beginner">Beginner</option>
           <option value="Intermediate" selected>Intermediate</option>
           <option value="Advanced">Advanced</option>
@@ -55,21 +216,21 @@
 
       <div class="field-row">
         <label>Fitness Goal</label>
-        <select name="goal">
-          <option value="Build muscle" selected>Build muscle</option>
+        <select name="goal" id="goal">
+          <option value="Build muscle">Build muscle</option>
           <option value="Lose fat">Lose fat</option>
           <option value="Increase endurance">Increase endurance</option>
         </select>
       </div>
 
       <div class="field-row">
-        <label>How many days can you workout per week?</label>
-        <input type="range" name="days" min="1" max="6" value="5">
+        <label>Workout Days Per Week</label>
+        <input type="range" name="days" id="days" min="1" max="6" value="3" />
       </div>
 
       <div class="field-row">
-        <label>Equipment</label>
-        <select name="equipment" multiple>
+        <label>Available Equipment</label>
+        <select name="equipment" id="equipment" multiple>
           <option value="Cardio" selected>Cardio</option>
           <option value="Strength">Strength</option>
           <option value="Functional">Functional</option>
@@ -78,17 +239,134 @@
         </select>
       </div>
 
-<a href="result.html" class="btn" style="display: block; text-align: center;">GENERATE YOUR WORKOUT</a>
-
-
-      <div class="footer">
-        By signing up you agree to our 
-        <a href="#" style="color: #fff; text-decoration: underline;">Terms and Conditions</a> and 
-        <a href="#" style="color: #fff; text-decoration: underline;">Privacy Policy</a>
+      <div class="field-row">
+        <label>Water Intake (L)</label>
+        <input type="number" id="water" placeholder="3.3" />
       </div>
+
+      <div class="field-row">
+        <label>Calorie Intake (kcal)</label>
+        <input type="number" id="calorie" placeholder="1824" />
+      </div>
+
+      <div class="field-row">
+        <label>Workout Location</label>
+        <select id="location">
+          <option value="Home">Home</option>
+          <option value="Gym">Gym</option>
+        </select>
+      </div>
+
+      <button type="button" id="generateWorkout" class="btn">Generate Your Workout</button>
     </form>
+
+    <div id="workoutResult" class="workout-output" style="display: none;"></div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Loader -->
+  <div id="loadingOverlay">
+    <div class="loading-box">
+      <div class="dots-loader">
+        <span>.</span><span>.</span><span>.</span>
+      </div>
+      <p>💡 Generating your personalized workout...</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 AI Workout Generator. All rights reserved.</p>
+  </footer>
+
+<script>
+  const GEMINI_API_KEY = "AIzaSyDTkO6p5M9o0dcSS6D8SiudNMUmZoRClv4";
+
+  document.getElementById("generateWorkout").addEventListener("click", async () => {
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const weight = document.getElementById("weight").value;
+    const level = document.getElementById("level").value;
+    const goal = document.getElementById("goal").value;
+    const days = document.getElementById("days").value;
+    const equipment = Array.from(document.getElementById("equipment").selectedOptions).map(opt => opt.value).join(", ");
+    const water = document.getElementById("water").value;
+    const calorie = document.getElementById("calorie").value;
+    const location = document.getElementById("location").value;
+
+    const prompt = `
+Create a ${days}-day workout plan for a ${gender}, weight ${weight} lbs, fitness level: ${level}, goal: ${goal}.
+Available equipment: ${equipment}.
+Water intake: ${water}L, Calorie intake: ${calorie} kcal, Workout Location: ${location}.
+Format like this:
+Day 1 - Chest & Triceps (Est. 45 mins)
+- Incline Push-ups (3 sets | AMRAP)
+- Dumbbell Bicep Curl (3 sets | 12 reps)
+Use bullet list, clean layout, and clear formatting.
+`;
+
+    document.getElementById("loadingOverlay").style.display = "flex";
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
+    });
+
+    const result = await response.json();
+    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Error generating workout.";
+    document.getElementById("loadingOverlay").style.display = "none";
+    displayWorkout(text);
+  });
+
+  function displayWorkout(rawText) {
+    const outputDiv = document.getElementById("workoutResult");
+    outputDiv.innerHTML = "";
+    outputDiv.style.display = "block";
+
+    const days = rawText.split(/Day \d+ - /).slice(1);
+    const dayTitles = [...rawText.matchAll(/Day \d+ - [^\n]+/g)];
+
+    days.forEach((content, idx) => {
+      const title = dayTitles[idx]?.[0] || `Day ${idx + 1}`;
+      const exercises = content.trim().split("\n").filter(line => line.trim());
+
+      const dayBlock = document.createElement("div");
+      dayBlock.className = "day-block";
+      dayBlock.innerHTML = `<h3>${title}</h3>`;
+
+      exercises.forEach(ex => {
+        let icon = "🏋️‍♂️";
+        if (/push[- ]?up/i.test(ex)) icon = "🤸‍♂️";
+        else if (/curl/i.test(ex)) icon = "💪";
+        else if (/squat/i.test(ex)) icon = "🦵";
+        else if (/plank/i.test(ex)) icon = "🧘";
+        else if (/crunch/i.test(ex)) icon = "🧍";
+        else if (/row/i.test(ex)) icon = "🚣";
+        else if (/jog|walk/i.test(ex)) icon = "🏃";
+        else if (/twist/i.test(ex)) icon = "🔄";
+        else if (/flye/i.test(ex)) icon = "🦅";
+        else if (/pull/i.test(ex)) icon = "📥";
+        else if (/raise/i.test(ex)) icon = "📈";
+        else if (/tricep/i.test(ex)) icon = "🏹";
+
+        const exEl = document.createElement("div");
+        exEl.className = "exercise";
+        exEl.innerHTML = `<span class="icon">${icon}</span><div class="exercise-text">${ex}</div>`;
+        dayBlock.appendChild(exEl);
+      });
+
+      outputDiv.appendChild(dayBlock);
+    });
+
+    // ✅ Add Login and Sign Up buttons at the bottom
+    const buttonRow = document.createElement("div");
+    buttonRow.style.textAlign = "center";
+    buttonRow.style.marginTop = "30px";
+    buttonRow.innerHTML = `
+      <a href="signin&signup.html" class="btn" style="margin-right: 10px;">Login</a>
+      <a href="signin&signup.html" class="btn">Sign Up</a>
+    `;
+    outputDiv.appendChild(buttonRow);
+  }
+</script>
+
 </body>
 </html>

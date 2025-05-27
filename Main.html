@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="index.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
- </head>
+</head>
 <body>
   <nav>
     <div class="logo">AI Fit</div>
@@ -31,53 +31,43 @@
 
   
 
-<section class="summary-section fade-in">
-  <h2>Personal summary based on your answers</h2>
+  <!-- Summary Section -->
+  <section class="summary-section fade-in">
+    <h2>Personal summary based on your answers</h2>
 
-  <div class="summary-box">
-    <div class="bmi">
-      <p class="label">Current BMI</p>
-      <h3>38.1 BMI</h3>
-      <div class="bmi-bar">
-        <div class="bar"></div>
-        <div class="pointer" style="left: 90%;"></div>
+    <div class="summary-box">
+      <div class="bmi">
+        <p class="label">Current BMI</p>
+        <h3 id="bmi-value">0 BMI</h3>
+        <div class="bmi-bar">
+          <div class="bar"></div>
+          <div class="pointer" style="left: 0%;"></div>
+        </div>
+        <p class="status">Obese</p>
+        <p class="desc">The body mass index (BMI) is a measure that uses your height and weight to work out if your weight is healthy.</p>
       </div>
-      <p class="status">Obese</p>
-      <p class="desc">The body mass index (BMI) is a measure that uses your height and weight to work out if your weight is healthy.</p>
-    </div>
 
-    <div class="intake-grid">
-      <div class="intake-card">
-        <div class="recommend">recommended</div>
-        <p class="label">Daily calorie intake</p>
-        <h3>1824 kcal</h3>
-        <div class="bar-track">
-          <div class="bar-fill" style="width: 36%;"></div>
+      <div class="intake-grid">
+        <div class="intake-card">
+          <div class="recommend">recommended</div>
+          <p class="label">Daily calorie intake</p>
+          <h3 id="calories">0 kcal</h3>
+          <div class="bar-track"><div class="bar-fill" style="width: 36%;"></div></div>
+          <div class="bar-labels"><span>1000 kcal</span><span>5000 kcal</span></div>
         </div>
-        <div class="bar-labels">
-          <span>1000 kcal</span>
-          <span>5000 kcal</span>
-        </div>
-      </div>
-      <div class="intake-card">
-        <div class="recommend">recommended</div>
-        <p class="label">Daily water intake</p>
-        <h3>3.3 l</h3>
-        <div class="water-cups">
-          <span class="cup filled"></span>
-          <span class="cup filled"></span>
-          <span class="cup filled"></span>
-          <span class="cup filled"></span>
-          <span class="cup filled"></span>
-          <span class="cup filled"></span>
-          <span class="cup"></span>
-          <span class="cup"></span>
+        <div class="intake-card">
+          <div class="recommend">recommended</div>
+          <p class="label">Daily water intake</p>
+          <h3 id="water">0 l</h3>
+          <div class="water-cups">
+            <span class="cup"></span><span class="cup"></span><span class="cup"></span><span class="cup"></span>
+            <span class="cup"></span><span class="cup"></span><span class="cup"></span><span class="cup"></span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <h2>Personalized plan for <span class="highlight">Alan Joshua</span> is <span class="highlight orange">ready!</span></h2>
+  <h2>Personalized plan for <span class="highlight">You</span> is <span class="highlight orange">ready!</span></h2>
 
   <div class="plan-grid">
     <div class="plan-item">⏱️ <strong>1 hour</strong><br>Workout Duration</div>
@@ -221,5 +211,44 @@
     <p>&copy; 2025 AI Fit. All rights reserved.</p>
     <p><a href="#" style="color: #00f7ff;">Terms</a> | <a href="#" style="color: #00f7ff;">Privacy</a></p>
   </footer>
+ <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const bmiValue = 38.1;
+      const calorieValue = 1824;
+      const waterLiters = 3.3;
+
+      // Animate BMI Pointer
+      const pointer = document.querySelector(".pointer");
+      const bmiText = document.getElementById("bmi-value");
+      pointer.style.transition = "left 1.5s ease";
+      pointer.style.left = `${Math.min((bmiValue / 40) * 100, 100)}%`;
+
+      animateCount(bmiText, bmiValue, " BMI", true);
+      animateCount(document.getElementById("calories"), calorieValue, " kcal");
+      animateCount(document.getElementById("water"), waterLiters, " l", true);
+
+      const cups = document.querySelectorAll(".cup");
+      const filled = Math.floor(waterLiters);
+      const partial = waterLiters - filled;
+
+      cups.forEach((cup, i) => {
+        if (i < filled) cup.classList.add("filled");
+        else if (i === filled && partial >= 0.25) cup.classList.add("filled", "partial");
+      });
+
+      function animateCount(el, target, suffix = "", isFloat = false) {
+        let count = 0;
+        const step = target / 60;
+        const interval = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            count = target;
+            clearInterval(interval);
+          }
+          el.textContent = isFloat ? count.toFixed(1) + suffix : Math.floor(count) + suffix;
+        }, 30);
+      }
+    });
+  </script>
 </body>
 </html>
