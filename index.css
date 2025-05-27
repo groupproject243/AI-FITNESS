@@ -1,3 +1,7 @@
+    html{
+      scroll-behavior: smooth;
+    }
+    
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body {
       background: linear-gradient(to bottom, #003a49, #00c9c8);
@@ -19,6 +23,58 @@
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a { color: white; text-decoration: none; transition: 0.3s; }
     nav ul li a:hover { color: #00f7ff; }
+
+    /* Hamburger hidden by default */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  color: #00f7ff;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* Responsive menu hidden by default */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Media query for small screens */
+@media (max-width: 530px) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 58, 73, 0.95);
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    transform: translateY(-200%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  nav ul li {
+    padding: 1rem 0;
+  }
+}
+
 
     .hero {
       height: 100vh;

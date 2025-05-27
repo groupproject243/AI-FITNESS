@@ -9,14 +9,15 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <nav>
-    <div class="logo">AI Fit</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#plans">Workout Plans</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-    </ul>
-  </nav>
+<nav>
+  <div class="logo">AI Fit</div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <ul id="nav-links" class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#plans">Workout Plans</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+</nav>
 
   <section class="hero fade-in" id="home">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -249,6 +250,10 @@
         }, 30);
       }
     });
+
+      document.getElementById("hamburger").addEventListener("click", () => {
+    document.getElementById("nav-links").classList.toggle("active");
+  });
   </script>
 </body>
 </html>
