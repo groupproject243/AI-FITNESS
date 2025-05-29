@@ -74,7 +74,7 @@ form.addEventListener('submit', async function(e) {
     alert("Login successful! 🎉");
     setTimeout(() => {
       localStorage.setItem("currentUser", email); // store user info
-      window.location.href = "/Main Page/Main.html"; // Redirect
+      window.location.href = "Main.html"; // Redirect
     }, 1000);
   }
 });
