@@ -1,0 +1,30 @@
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #001f2e;
+      color: #e0f7ff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .terms-container {
+      max-width: 800px;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #00f7ff;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: #00e0e0;
+      margin-top: 40px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }

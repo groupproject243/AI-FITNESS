@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>AI Fit | Smarter Workouts</title>
+   <link rel="icon" type="image/png" href="/imsges/Logo.png">
+   <link rel="stylesheet" href="form.css">
+
+</head>
+<body>
+  <div class="container">
+    <form id="userForm" class="form-card">
+      <h2>Generate Your AI-Powered Workout Plan</h2>
+
+      <div class="field-row">
+        <label>Gender</label>
+        <div class="toggle-group">
+          <input type="radio" name="gender" id="male" value="Male" checked>
+          <label for="male">Male</label>
+          <input type="radio" name="gender" id="female" value="Female">
+          <label for="female">Female</label>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label>Bodyweight</label>
+        <input type="number" name="weight" id="weight" placeholder="180" required>
+      </div>
+
+      <div class="field-row">
+        <label>Fitness Level</label>
+        <select name="level" id="level">
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate" selected>Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label>Fitness Goal</label>
+        <select name="goal" id="goal">
+          <option value="Build muscle">Build muscle</option>
+          <option value="Lose fat">Lose fat</option>
+          <option value="Increase endurance">Increase endurance</option>
+        </select>
+      </div>
+
+<div class="field-row range-container">
+  <label for="days">Workout Days Per Week</label>
+  <div class="range-wrapper">
+    <input type="range" name="days" id="days" min="1" max="6" value="3" />
+    <div id="tooltip" class="tooltip">3</div>
+  </div>
+</div>
+
+
+      <div class="field-row">
+        <label>Available Equipment</label>
+        <select name="equipment" id="equipment" multiple>
+          <option value="Cardio" selected>Cardio</option>
+          <option value="Strength">Strength</option>
+          <option value="Functional">Functional</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+          <option value="None">None</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label>Water Intake (L)</label>
+        <input type="number" id="water" placeholder="3.3" />
+      </div>
+
+      <div class="field-row">
+        <label>Calorie Intake (kcal)</label>
+        <input type="number" id="calorie" placeholder="1824" />
+      </div>
+
+      <div class="field-row">
+        <label>Workout Location</label>
+        <select id="location">
+          <option value="Home">Home</option>
+          <option value="Gym">Gym</option>
+        </select>
+      </div>
+
+      <button type="button" id="generateWorkout" class="btn">Generate Your Workout</button>
+    </form>
+
+    <div id="workoutResult" class="workout-output" style="display: none;"></div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loadingOverlay">
+    <div class="loading-box">
+      <div class="dots-loader">
+        <span>.</span><span>.</span><span>.</span>
+      </div>
+      <p>💡 Generating your personalized workout...</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 AI Workout Generator. All rights reserved.</p>
+  </footer>
+
+<script src="form.js"></script>
+
+</body>
+</html>

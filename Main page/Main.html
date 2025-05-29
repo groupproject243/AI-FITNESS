@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
    <title>AI Fit | Smarter Workouts</title>
    <link rel="icon" type="image/png" href="/imsges/Logo.png">
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="Main.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -22,7 +22,7 @@
 
   <section class="hero fade-in" id="home">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="videoplayback.mp4" type="video/mp4" />
+      <source src="/Video/videoplayback.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div class="video-overlay"></div>
@@ -93,27 +93,27 @@
   <h2><span class="highlight">Our</span> Services</h2>
   <div class="services-grid">
     <div class="service-card">
-      <img src="image1.jpg" alt="Physical Fitness" />
+      <img src="/imsges/image1.jpg" alt="Physical Fitness" />
       <h3>Physical Fitness</h3>
     </div>
     <div class="service-card">
-      <img src="image2.jpg" alt="Weight Gain" />
+      <img src="/imsges/image2.jpg" alt="Weight Gain" />
       <h3>Weight Gain</h3>
     </div>
     <div class="service-card">
-      <img src="image3.jpg" alt="Strength Training" />
+      <img src="/imsges/image3.jpg" alt="Strength Training" />
       <h3>Strength Training</h3>
     </div>
     <div class="service-card">
-      <img src="image4.jpg" alt="Fat Lose" />
+      <img src="/imsges/image4.jpg" alt="Fat Lose" />
       <h3>Fat Loss</h3>
     </div>
     <div class="service-card">
-      <img src="image5.jpg" alt="Weightlifting" />
+      <img src="/imsges/image5.jpg" alt="Weightlifting" />
       <h3>Weightlifting</h3>
     </div>
     <div class="service-card">
-      <img src="about.jpg" alt="Running" />
+      <img src="/imsges/about.jpg" alt="Running" />
       <h3>Running</h3>
     </div>
   </div>
@@ -235,7 +235,7 @@
       <p>Always know what to train. AI Fit removes the pain of planning to let you focus on making progress.</p>
     </div>
     <div class="zigzag-image">
-      <img src="step1.png" alt="Strength training" />
+      <img src="/imsges/step1.png" alt="Strength training" />
     </div>
   </div>
 
@@ -246,7 +246,7 @@
       <p>AI Fit learns from your training history to adapt your recommendations dynamically.</p>
     </div>
     <div class="zigzag-image">
-      <img src="step2.png" alt="Progress tracking" />
+      <img src="/imsges/step2.png" alt="Progress tracking" />
     </div>
   </div>
 
@@ -257,7 +257,7 @@
       <p>AI Fit adjusts each workout around your equipment, schedule, and goals — without sacrificing results.</p>
     </div>
     <div class="zigzag-image">
-      <img src="step3.png" alt="Custom workouts" />
+      <img src="/imsges/step3.png" alt="Custom workouts" />
     </div>
   </div>
 
@@ -268,7 +268,7 @@
       <p>AI Fit tracks recovery to optimize performance and prevent injury.</p>
     </div>
     <div class="zigzag-image">
-      <img src="step4.png" alt="Muscle recovery" />
+      <img src="/imsges/step4.png" alt="Muscle recovery" />
     </div>
   </div>
 </section>
@@ -282,7 +282,7 @@
 
   <div class="pricing-layout">
     <div class="plan-image">
-      <img src="men1.png" alt="Muscular Model" />
+      <img src="/imsges/men1.png" alt="Muscular Model" />
     </div>
     <div class="plan-options">
       <label class="plan-option">
@@ -341,154 +341,8 @@
     <p>&copy; 2025 AI Fit. All rights reserved.</p>
     <p><a href="Terms&Conditions.html" style="color: #00f7ff;">Terms</a> | <a href="Terms&Conditions.html" style="color: #00f7ff;">Privacy</a></p>
   </footer>
- <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const bmiValue = 38.1;
-      const calorieValue = 1824;
-      const waterLiters = 3.3;
 
-      // Animate BMI Pointer
-      const pointer = document.querySelector(".pointer");
-      const bmiText = document.getElementById("bmi-value");
-      pointer.style.transition = "left 1.5s ease";
-      pointer.style.left = `${Math.min((bmiValue / 40) * 100, 100)}%`;
-
-      animateCount(bmiText, bmiValue, " BMI", true);
-      animateCount(document.getElementById("calories"), calorieValue, " kcal");
-      animateCount(document.getElementById("water"), waterLiters, " l", true);
-
-      const cups = document.querySelectorAll(".cup");
-      const filled = Math.floor(waterLiters);
-      const partial = waterLiters - filled;
-
-      cups.forEach((cup, i) => {
-        if (i < filled) cup.classList.add("filled");
-        else if (i === filled && partial >= 0.25) cup.classList.add("filled", "partial");
-      });
-
-      function animateCount(el, target, suffix = "", isFloat = false) {
-        let count = 0;
-        const step = target / 60;
-        const interval = setInterval(() => {
-          count += step;
-          if (count >= target) {
-            count = target;
-            clearInterval(interval);
-          }
-          el.textContent = isFloat ? count.toFixed(1) + suffix : Math.floor(count) + suffix;
-        }, 30);
-      }
-    });
-
-      document.getElementById("hamburger").addEventListener("click", () => {
-    document.getElementById("nav-links").classList.toggle("active");
-  });
-
-const GEMINI_API_KEY = "AIzaSyDTkO6p5M9o0dcSS6D8SiudNMUmZoRClv4"; // Replace with your new Gemini API Key
-
-// Toggle Chatbot
-function toggleChat() {
-  const chat = document.getElementById("chatbot-container");
-  chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
-}
-
-// Handle Enter Key
-function handleKey(event) {
-  if (event.key === "Enter") {
-    sendMessage();
-  }
-}
-
-// Send User Message to Gemini API with typing animation
-async function sendMessage() {
-  const input = document.getElementById("userInput");
-  const message = input.value.trim();
-  if (!message) return;
-
-  appendMessage("You", message);
-  input.value = "";
-
-  // Show typing indicator
-  const typingId = appendTypingIndicator("AI Fit");
-
-  try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [
-                {
-                  text: `You are AI Fit, a professional virtual fitness coach. Reply in a structured, friendly, and motivating tone. Use bullet points and formatting where helpful. Avoid overly casual language.\n\nUser: "${message}"`
-                }
-              ]
-            }
-          ]
-        }),
-      }
-    );
-
-    const result = await res.json();
-    const reply = result?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-
-    removeTypingIndicator(typingId);
-    appendMessage("AI Fit", reply || "⚠️ Sorry, I didn’t understand that.");
-  } catch (error) {
-    console.error("Gemini error:", error);
-    removeTypingIndicator(typingId);
-    appendMessage("AI Fit", "⚠️ Error connecting to Gemini.");
-  }
-}
-
-// Append Message with Formatting and Colors
-function appendMessage(sender, text) {
-  const body = document.getElementById("chat-body");
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "chat-message";
-
-  const color = sender === "You" ? "#00f7ff" : "#ffffff";
-
-  const formattedText = text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-    .replace(/\n{2,}/g, '</p><p>')                   // Paragraphs
-    .replace(/\n/g, '<br>');                         // Line breaks
-
-  messageDiv.innerHTML = `<strong style="color:${color}">${sender}:</strong><p style="color:${color}">${formattedText}</p>`;
-  body.appendChild(messageDiv);
-  body.scrollTop = body.scrollHeight;
-}
-
-// Typing indicator logic
-function appendTypingIndicator(sender) {
-  const body = document.getElementById("chat-body");
-  const typingId = "typing-" + Date.now();
-  const typingDiv = document.createElement("div");
-  typingDiv.className = "chat-message";
-  typingDiv.id = typingId;
-  typingDiv.innerHTML = `
-    <strong style="color:#ffffff">${sender}:</strong>
-    <span class="typing-indicator">
-      <span class="typing-dot"></span>
-      <span class="typing-dot"></span>
-      <span class="typing-dot"></span>
-    </span>
-  `;
-  body.appendChild(typingDiv);
-  body.scrollTop = body.scrollHeight;
-  return typingId;
-}
-
-function removeTypingIndicator(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
-}
-
-
-  </script>
+  <script src="Main.js"></script>
 
   <!-- AI Fit Chatbot -->
   <div class="chatbot-container" id="chatbot-container" style="display: none;">
